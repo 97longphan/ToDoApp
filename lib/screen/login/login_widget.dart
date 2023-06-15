@@ -1,3 +1,4 @@
+import 'package:page_transition/page_transition.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/component/flutter_flow_theme.dart';
 import '/component/flutter_flow_util.dart';
@@ -7,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
+import '/nav/nav.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -210,20 +212,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   0.0, 24.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  // GoRouter.of(context).prepareAuthEvent();
+                                  GoRouter.of(context).prepareAuthEvent();
 
-                                  // final user =
-                                  //     await authManager.signInWithEmail(
-                                  //   context,
-                                  //   _model.emailTextController.text,
-                                  //   _model.passwordTextController.text,
-                                  // );
-                                  // if (user == null) {
-                                  //   return;
-                                  // }
+                                  final user =
+                                      await authManager.signInWithEmail(
+                                    context,
+                                    _model.emailTextController.text,
+                                    _model.passwordTextController.text,
+                                  );
+                                  if (user == null) {
+                                    return;
+                                  }
 
-                                  // context.goNamedAuth(
-                                  //     'myTasks', context.mounted);
+                                  context.goNamedAuth(
+                                      'myTasks', context.mounted);
                                 },
                                 text: 'Login',
                                 options: FFButtonOptions(
@@ -274,18 +276,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      // context.pushNamed(
-                                      //   'Register',
-                                      //   extra: <String, dynamic>{
-                                      //     kTransitionInfoKey: TransitionInfo(
-                                      //       hasTransition: true,
-                                      //       transitionType:
-                                      //           PageTransitionType.fade,
-                                      //       duration:
-                                      //           Duration(milliseconds: 200),
-                                      //     ),
-                                      //   },
-                                      // );
+                                      context.pushNamed(
+                                        'Register',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 200),
+                                          ),
+                                        },
+                                      );
                                     },
                                     text: 'Register',
                                     options: FFButtonOptions(
